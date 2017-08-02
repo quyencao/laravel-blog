@@ -19,4 +19,10 @@ Route::get('/blog/tag/{id}', 'PostController@getPostsTag')->name('blog.post.tag'
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/profile', 'UserController@profile')->name('admin.profile');
+
+    Route::get('/post', 'UserController@post')->name('admin.post');
+});
+
+
