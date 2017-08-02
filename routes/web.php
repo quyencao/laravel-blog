@@ -16,3 +16,7 @@ Route::get('/', 'PostController@index')->name('blog.post.index');
 Route::get('/blog/details/{id}', 'PostController@show')->name('blog.post.show');
 
 Route::get('/blog/tag/{id}', 'PostController@getPostsTag')->name('blog.post.tag');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

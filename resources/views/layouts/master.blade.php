@@ -29,26 +29,31 @@
                     <a class="navbar-brand" href="{{ route('blog.post.index') }}"><span>Color</span>Mag</a> </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav custom_nav">
-                        <li class=""><a href="index.html">Home</a></li>
-                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Jobs</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Jobs Home</a> </li>
-                                <li><a href="#">Faq</a></li>
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Article</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Features</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Standard Blog Layout</a></li>
-                                <li><a href="#">Post With Comments</a></li>
-                                <li><a href="#">Page:Right Sidebar</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Shortcodes</a></li>
-                        <li><a href="#">Archive</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Download Template</a></li>
+                        <li class=""><a href="{{ route('blog.post.index') }}">Home</a></li>
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
